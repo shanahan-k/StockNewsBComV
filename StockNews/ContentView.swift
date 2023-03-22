@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct ContentView: View {
-    
+    @State private var searchText = ""
     @StateObject var apiManager = ApiManager.shared
     
     var body: some View {
@@ -32,6 +32,7 @@ struct ContentView: View {
                 Text("Loading stock data...")
             }
         }
+        .searchable(text: $searchText)
         .onAppear {
             Task {
                 await apiManager.getTickers()
