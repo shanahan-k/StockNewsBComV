@@ -12,9 +12,12 @@ class ApiManager: ObservableObject {
     let apiKey: String
     static let shared = ApiManager()
     @Published var results: [ApiResult]? = nil
+    private var names: [String] = []
+    private var tickers: [String] = []
     
     private init() {
         apiKey = "0HC_ThU3h3wLpxMmtROZKlp6RfZPyI4t"
+        
     }
     
     func getTickers() async {
@@ -42,4 +45,17 @@ class ApiManager: ObservableObject {
             print("Invalid data")
         }
     }
+    
+    func getNames() {
+        for item in self.results! {
+            names.append(item.name)
+        }
+    }
+    
+    func getTickers()  {
+        for item in self.results! {
+            tickers.append(item.ticker)
+        }
+    }
+   
 }

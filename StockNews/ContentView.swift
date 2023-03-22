@@ -10,7 +10,8 @@ import SwiftUI
 struct ContentView: View {
     @State private var searchText = ""
     @StateObject var apiManager = ApiManager.shared
-    
+    @State var names: [String]
+    @State var tickers: [String]
     var body: some View {
         NavigationView {
             if let results = apiManager.results {
@@ -39,10 +40,13 @@ struct ContentView: View {
             }
         }
     }
-}
-
-struct ContentView_Previews: PreviewProvider {
-    static var previews: some View {
-        ContentView()
+    
+    var searchResults: [String] {
+        if searchText.isEmpty {
+            return names
+        } else {
+            return names.filter {$0.contains(searchText)}
+        }
     }
 }
+
